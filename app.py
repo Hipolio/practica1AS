@@ -27,6 +27,7 @@ con = mysql.connector.connect(
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/pusherProductos")
 def pusherProductos():
     import pusher
     
@@ -40,6 +41,7 @@ def pusherProductos():
     
     pusher_client.trigger("canalProductos", "eventoProductos", {"message": "Hola Mundo!"})
     return make_response(jsonify({}))
+
 @app.route("/")
 def index():
     if not con.is_connected():
@@ -246,8 +248,6 @@ def eliminarProducto():
     con.close()
 
     return make_response(jsonify({}))
-
-
 
 
 
